@@ -5,6 +5,10 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var distPath = path.join(__dirname, 'dist');
 
+var theme = {};
+var pkgPath = path.join(__dirname, 'package.json');
+var pkg = require(pkgPath);
+theme = pkg.theme;
 module.exports = {
     devtool: 'source-map',
     entry: [
@@ -19,6 +23,11 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: __dirname + '/index.tpl',
+            minify: {
+                minifyCSS: true,
+                minifyJS: true
+            },
+            favicon: __dirname + '/favicon.ico',
             chunksSortMode: 'dependency'
         })
     ],
@@ -35,11 +44,11 @@ module.exports = {
             },
             {
                 test: /\.css?$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader?sourceMap")
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader?sourceMap!postcss-loader?sourceMap")
             },
             {
                 test: /\.less?$/,
-                loader:  ExtractTextPlugin.extract("style-loader", "css-loader!less-loader?sourceMap"),
+                loader:  ExtractTextPlugin.extract("style-loader", "css-loader?sourceMap!postcss-loader?sourceMap!" + `less-loader?{"sourceMap":true,"modifyVars":${JSON.stringify(theme)}}`),
                 include: __dirname
             },
             {

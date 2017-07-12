@@ -4,7 +4,7 @@ var base = require('./webpack.config');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 base.devtool = 'cheap-module-eval-source-map';
-base.entry.unshift('react-hot-loader/patch', 'webpack-hot-middleware/client');
+base.entry.unshift('babel-polyfill', 'react-hot-loader/patch', 'webpack-hot-middleware/client');
 base.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),

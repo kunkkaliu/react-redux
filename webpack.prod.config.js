@@ -1,11 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
 var base = require('./webpack.config');
-var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var Md5HashPlugin = require('md5-hash-webpack-plugin');
 
 base.devtool = 'source-map';
+base.entry.unshift('babel-polyfill');
 
 // use hash filename to support long-term caching
 base.output.filename = '[name].[chunkhash].js';
@@ -21,7 +21,6 @@ base.plugins.push(
     new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new LodashModuleReplacementPlugin,
     new webpack.optimize.UglifyJsPlugin({
         sourceMap: true,
         compress: {
