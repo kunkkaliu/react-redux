@@ -1,7 +1,7 @@
 import {addHttpLoadLength, delHttpLoadLength} from '../actions/load';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import {store} from '../store';
+import store from '../store';
 
 let pending = []; //声明一个数组用于存储每个ajax请求的取消函数和ajax标识
 let cancelToken = axios.CancelToken;

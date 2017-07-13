@@ -3,4 +3,4 @@
  */
 import configureStore from '../store/configureStore';
 
-export var store = configureStore();
+export default configureStore();
