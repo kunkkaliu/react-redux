@@ -1,4 +1,3 @@
-import {message} from 'antd';
 import {addHttpLoadLength, delHttpLoadLength} from '../actions/load';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
@@ -22,10 +21,6 @@ var normalAxios = axios.create({
 });
 
 ///////统一处理所有http请求和响应, 在请求发出与返回时进行拦截, 在这里可以做loading页面的展示与隐藏, token失效是否跳转到登录页等事情;
-message.config({
-    top: 20,
-    duration: 2
-});
 normalAxios.interceptors.request.use(config => {
     // Do something before request is sent
     removePending(config); //在一个ajax发送前执行一下取消操作
@@ -46,7 +41,7 @@ normalAxios.interceptors.response.use(response => {
     removePending(response.config);  //在一个ajax响应后再执行一下取消操作，把已经完成的请求从pending中移除
     store && store.dispatch(delHttpLoadLength());
     if(response.data && response.data.code && response.data.code != 0) {
-        message.error(response.data.message || response.data.data || '操作失败!');
+        alert(response.data.message || response.data.data || '操作失败!');
     }else if(response.data && response.data.code == 0) {
         if(response.config && response.config.params && response.config.params.showMsg) {
             message.success(response.data.message || '操作成功!')
@@ -60,13 +55,14 @@ normalAxios.interceptors.response.use(response => {
         var ssoURL = (error && error.response && error.response.data && error.response.data.data) || '';
         location.href = ssoURL + encodeURIComponent(location.href);
     }else if(error && error.response && error.response.data && error.response.data.message) {
-        message.error(error.response.data.message);
+        alert(error.response.data.message);
     }else if(error && error.message) {
-        message.error(error.message);
+        alert(error.message);
     }
     return Promise.reject(error.response && error.response.data);
 });
 
+var mockAxios = axios.create();
 // mock 数据
 var mock = new MockAdapter(mockAxios);
 

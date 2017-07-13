@@ -1,22 +1,13 @@
-import React from 'react'
-
-import { Layout } from 'antd'
-
+import React from 'react';
 import './index.less'
 
-const { Footer } = Layout;
+const commonFooter = () => {
+  console.log("footer");
+  return (
+      <div style={{ textAlign: 'center' }}>
+        瓜子无线 版权所有 © 2017 wx.guazi.com
+      </div>
+  )
+};
 
-export default class commonFooter extends React.PureComponent {
-  constructor () {
-    super()
-  }
-
-  render () {
-    console.log("footer");
-    return (
-      <Footer style={{ textAlign: 'center' }}>
-        瓜子无线 版权所有 © 2017 wuxian.guazi.com
-      </Footer>
-    )
-  }
-}
+export default commonFooter;

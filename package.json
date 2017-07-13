@@ -1,7 +1,7 @@
 {
   "name": "wuxian-base",
   "version": "1.0.0",
-  "description": "React Ant.Design",
+  "description": "React Redux",
   "main": "index.js",
   "scripts": {
     "test": "mocha tests/.setup.js tests/**/*-test.js --compilers css:mocha-compiler.js",
@@ -16,7 +16,6 @@
   "author": "dhl",
   "license": "MIT",
   "dependencies": {
-    "antd": "^2.10.3",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "history": "^4.3.0",
@@ -69,8 +68,5 @@
     "webpack-dev-middleware": "^1.8.4",
     "webpack-dev-server": "^1.16.3",
     "webpack-hot-middleware": "^2.13.0"
-  },
-  "theme": {
-    "primary-color": "#22ac38"
   }
 }

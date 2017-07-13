@@ -5,10 +5,6 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var distPath = path.join(__dirname, 'dist');
 
-var theme = {};
-var pkgPath = path.join(__dirname, 'package.json');
-var pkg = require(pkgPath);
-theme = pkg.theme;
 module.exports = {
     devtool: 'source-map',
     entry: [
@@ -48,7 +44,7 @@ module.exports = {
             },
             {
                 test: /\.less?$/,
-                loader:  ExtractTextPlugin.extract("style-loader", "css-loader?sourceMap!postcss-loader?sourceMap!" + `less-loader?{"sourceMap":true,"modifyVars":${JSON.stringify(theme)}}`),
+                loader:  ExtractTextPlugin.extract("style-loader", "css-loader?sourceMap!postcss-loader?sourceMap!less-loader?sourceMap"),
                 include: __dirname
             },
             {
